@@ -194,13 +194,13 @@ def getRandomMove(board, lastMove=None):
     return random.choice(validMoves)
 
 
-def getLeftTopOfTile(tileX, tileY):
+def getLeftTopOfTile(tileX, tileY): # papan ke pixel
     left = XMARGIN + (tileX * TILESIZE) + (tileX - 1)
     top = YMARGIN + (tileY * TILESIZE) + (tileY - 1)
     return (left, top)
 
 
-def getSpotClicked(board, x, y):
+def getSpotClicked(board, x, y): # pixel ke papan
     # from the x & y pixel coordinates, get the x & y board coordinates
     for tileX in range(len(board)):
         for tileY in range(len(board[0])):
@@ -222,7 +222,7 @@ def drawTile(tilex, tiley, number, adjx=0, adjy=0):
     DISPLAYSURF.blit(textSurf, textRect)
 
 
-def makeText(text, color, bgcolor, top, left):
+def makeText(text, color, bgcolor, top, left): #object position
     # create the Surface and Rect objects for some text.
     textSurf = BASICFONT.render(text, True, color, bgcolor)
     textRect = textSurf.get_rect()
@@ -232,7 +232,7 @@ def makeText(text, color, bgcolor, top, left):
 
 def drawBoard(board, message):
     DISPLAYSURF.fill(BGCOLOR)
-    if message:
+    if message: # message 
         textSurf, textRect = makeText(message, MESSAGECOLOR, BGCOLOR, 5, 5)
         DISPLAYSURF.blit(textSurf, textRect)
 
@@ -241,12 +241,12 @@ def drawBoard(board, message):
             if board[tilex][tiley]:
                 drawTile(tilex, tiley, board[tilex][tiley])
 
-    left, top = getLeftTopOfTile(0, 0)
+    left, top = getLeftTopOfTile(0, 0) # board
     width = BOARDWIDTH * TILESIZE
     height = BOARDHEIGHT * TILESIZE
     pygame.draw.rect(DISPLAYSURF, BORDERCOLOR, (left - 5, top - 5, width + 11, height + 11), 4)
 
-    DISPLAYSURF.blit(RESET_SURF, RESET_RECT)
+    DISPLAYSURF.blit(RESET_SURF, RESET_RECT) #button
     DISPLAYSURF.blit(NEW_SURF, NEW_RECT)
     DISPLAYSURF.blit(SOLVE_SURF, SOLVE_RECT)
 
